@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Rock Paper Scissors</title>
+  <style>
+    body {
+	background:#212121;
+      text-align: center; 
+    }
+    input {
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;	  
+    }
+    .butdiv button {
+	margin-right:10px;
+	margin-left:10px;
+      width: 200px;
+      height: 200px;
+      border-radius: 50%;
+      transition: transform 0.5s;
+	  border-color:#212121;
+	  background:linear-gradient(to bottom right, #305170, #6DFC6B);
+    }
+    .emoji {
+      font-size: 100px;
+    }
+    .player {
+      font-size: 20px;
+      font-weight: 600;
+	  color:white;
+    }
+    .com {
+      color: red;
+    }
+
+    .rotate {
+      animation: rotateButton 0.7s linear;
+    }
+
+    @keyframes rotateButton {
+      0% {
+        transform: rotate(0deg);
+      }
+      25% {
+        transform: rotate(100deg);
+      }
+      70% {
+        transform: rotate(100deg);
+      }
+      100% {
+        transform: rotate(0deg);
+      }
+    }
+	button{
+	margin:auto;
+	}
+	#play{
+	text-transform:uppercase;
+	}
+	#computer{
+	text-transform:uppercase;
+	}
+	a{
+	text-decoration:none;
+	}
+	h1,h2{
+	text-shadow: 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px rgba(27, 253, 156, 0.1);
+	  color:white;
+	}
+  </style>
+</head>
+<body>
+  <h1>Rock - Paper - Scissors</h1>
+  <div class="butdiv"><button onclick="rotateOnClick(this, 'rock')" id="rockButton"><span class="emoji">&#9994;</span></button>
+  <button onclick="rotateOnClick(this, 'paper')" id="paperButton"><span class="emoji">&#128400;</span></button>
+  <button onclick="rotateOnClick(this, 'scissors')" id="scissorsButton"><span class="emoji">&#9996;</span></button></div><br>
+  <span class="player"><span style="text-shadow: 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px rgba(27, 253, 156, 0.1);">PLAYER:</span><span id="play"></span><br>
+  <span class="com">COMPUTER:<span id="computer"></span></span><br>
+  <h2 id="result"></h2>
+  <div style="background-color:#212121; margin:0;"><a href="rps.html"><button id="playAgainButton" style="display:none;
+														 text-decoration:none;
+														 --green: #1BFD9C;
+														  font-size: 15px;
+														  padding: 0.7em 2.7em;
+														  letter-spacing: 0.06em;
+														  position: relative;
+														  font-family: inherit;
+														  border-radius: 0.6em;
+														  overflow: hidden;
+														  transition: all 0.3s;
+														  line-height: 1.4em;
+														  border: 2px solid var(--green);
+														  background: linear-gradient(to right, rgba(27, 253, 156, 0.1) 1%, transparent 40%,transparent 60% , rgba(27, 253, 156, 0.1) 100%);
+														  color: var(--green);
+														  box-shadow: inset 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px 3px rgba(27, 253, 156, 0.1);
+														 ">Play Again</button></a></div>
+  <script>
+    function rotateOnClick(button, choice) {
+      button.classList.add('rotate');
+      setTimeout(function() {
+        evaluateResult(choice);
+        disableButtons();
+        document.getElementById('playAgainButton').style.display = 'block';
+      }, 700); 
+    }
+
+    function evaluateResult(playerChoice) {
+      var choices = ['rock', 'paper', 'scissors'];
+      var computerChoice = choices[Math.floor(Math.random() * choices.length)];
+
+      var resultDiv = document.getElementById('result');
+      var resultText;
+	  document.getElementById('play').innerText=playerChoice;
+	  document.getElementById('computer').innerText=computerChoice;
+	  
+      if (playerChoice === computerChoice) {
+        resultText = "IT'S A TIE";
+      } else if (
+        (playerChoice === 'rock' && computerChoice === 'scissors') ||
+        (playerChoice === 'paper' && computerChoice === 'rock') ||
+        (playerChoice === 'scissors' && computerChoice === 'paper')
+      ) {
+        resultText = "YOU WIN";
+      } else {
+        resultText = "YOU LOSE";
+      }
+      resultDiv.innerText = resultText;
+    }
+
+    function disableButtons() {
+      document.getElementById('rockButton').disabled = true;
+      document.getElementById('paperButton').disabled = true;
+      document.getElementById('scissorsButton').disabled = true;
+    }
+
+    function playAgain() {
+      document.getElementById('rockButton').disabled = false;
+      document.getElementById('paperButton').disabled = false;
+      document.getElementById('scissorsButton').disabled = false;
+      document.getElementById('playAgainButton').style.display = 'none';
+      document.getElementById('result').innerText = '';
+    }
+  </script>
+</body>
+</html>

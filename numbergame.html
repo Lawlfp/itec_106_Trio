@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Number Guessing Game</title>
+</head>
+<style>
+h1{
+  text-shadow: 0 0 10px rgba(27, 253, 156, 0.4), 0 0 9px rgba(27, 253, 156, 0.1);
+    color:white;
+}
+body{
+text-align:center;
+background:#212121;
+}
+button {
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  display: inline-block;
+  font-size: 15px;
+  font-weight: 600;
+  width: 120px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transform: skew(-21deg);
+}
+
+span {
+  display: inline-block;
+  transform: skew(21deg);
+}
+
+button::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 100%;
+  left: 0;
+  background: rgb(20, 20, 20);
+  opacity: 0;
+  z-index: -1;
+  transition: all 0.5s;
+}
+
+button:hover {
+  color: #fff;
+}
+
+button:hover::before {
+  left: 0;
+  right: 0;
+  opacity: 1;
+}
+.input {
+ border: 2px solid #e8e8e8;
+ padding: 15px;
+ border-radius: 10px;
+ background-color: #212121;
+ font-size: small;
+ font-weight: bold;
+ text-align: center;
+ margin-right:10px;
+ color:white;
+}
+
+.input:focus {
+ outline-color: white;
+ background-color: #212121;
+ color: #e8e8e8;
+ box-shadow: 5px 5px #888888;
+}
+div{
+color:white;
+}
+</style>
+<body>
+  <h1>Please input a number between 1-10</h1><br>
+  <input type="text" id="userInput" class="input"></input>
+  <button id="submitButton" onclick="checkNumber()"><span>Submit</span></button>
+
+  <div id="message"></div>
+  <div id="playAgain" style="display: none;">
+    <button onclick="restartGame()"><span>Play Again</span></button>
+  </div>
+
+  <script>
+    var attempts = 0;
+    var inputField = document.getElementById("userInput");
+    var submitButton = document.getElementById("submitButton");
+    var randomNumber = Math.floor(Math.random() * 10) + 1; 
+
+    function checkNumber() {
+      var userInput = inputField.value;
+      var messageBox = document.getElementById("message");
+      var playAgainButton = document.getElementById("playAgain");
+
+      if (userInput === "" || isNaN(userInput)) {
+        messageBox.innerHTML = "Invalid input: Please input a number between 1 - 10";
+      } else {
+        var number = parseInt(userInput);
+        attempts++;
+
+        if (number < 1 || number > 10) {
+          messageBox.innerHTML = "Invalid input: Please input a number between 1 - 10";
+        } else if (number === randomNumber) {
+          messageBox.innerHTML = "Congratulations! You've won in " + attempts + " attempts.";
+          playAgainButton.style.display = "block";
+          inputField.disabled = true; 
+          submitButton.disabled = true; 
+        } else if (number < randomNumber) {
+          messageBox.innerHTML = "Your number is lower, try again with a higher number.";
+        } else {
+          messageBox.innerHTML = "Your number is high, try again with a lower number.";
+        }
+      }
+    }
+
+    function restartGame() {
+      inputField.value = "";
+      document.getElementById("message").innerHTML = "";
+      document.getElementById("playAgain").style.display = "none";
+      inputField.disabled = false; 
+      submitButton.disabled = false; 
+      attempts = 0;
+      randomNumber = Math.floor(Math.random() * 10) + 1; 
+    }
+  </script>
+</body>
+</html>

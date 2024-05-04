@@ -1,0 +1,259 @@
+<html>
+<head><title>Calculator</title></head>
+<link href='https://fonts.googleapis.com/css?family=Inter' rel='stylesheet'>
+<style>
+.background
+{
+margin-top:119px;
+margin-left:103px;
+margin-right:100px;
+width:266px;
+height:431px;
+background-color:#262626;
+border-radius:5px;
+} 
+.top{
+height:96px;
+width:100%;
+background-color:#333333;
+border-top-left-radius:5px;
+border-top-right-radius:5px;
+}
+.bottom{
+height:335px;
+width:100%;
+background-color:#262626;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+}
+.horizontal{
+height:39px;
+width:266px;
+
+}
+.horizontal2{
+height:53px;
+width:266px;
+display:flex;
+flex-direction:row;
+justify-content:center;
+}
+.circlered{
+margin-left:5.4px;
+margin-right:5.4px;
+width:50px;
+height:50px;
+border-radius:50%;
+background: linear-gradient(to bottom, #DB3045, #66688A);
+box-shadow: 0 4px 0 0 rgba(0, 0, 0, 1);
+}
+.circleblue{
+margin-left:5.6px;
+margin-right:5.6px;
+width:50px;
+height:50px;
+border-radius:50%;
+background: linear-gradient(to bottom, #3038DB, #66688A);
+box-shadow: 0 4px 0 0 rgba(0, 0, 0, 1);
+}
+img{
+margin-top:10px;
+margin-left:8px;
+width:30px;
+height:30px;
+user-select:none;
+pointer-events: none;
+overflow:hidden;
+}
+.bottom span{
+display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  color:#FFFFFF;
+  font-weight:700;
+  font-family:Inter;
+  font-size:20px;
+}
+.horizontal3{
+height:53px;
+width:266px;
+display:flex;
+flex-direction:row;
+justify-content:center;
+margin-top:3px;
+}
+.horizontal4{
+height:53px;
+width:266px;
+display:flex;
+flex-direction:row;
+justify-content:center;
+margin-top:4px;
+}
+.circlegreen{
+margin-left:5.4px;
+margin-right:5.4px;
+width:50px;
+height:50px;
+border-radius:50%;
+background: linear-gradient(to bottom, #1C7B59, #3498E1);
+box-shadow: 0 4px 0 0 rgba(0, 0, 0, 1);
+}
+.block{
+width:266px;
+height:26px;
+}
+.textblock1{
+
+width:266px;
+height:25px;
+display: flex;
+align-items: center;
+justify-content: flex-end;
+text-align: right;
+}
+.small
+{
+font-family:Inter;
+font-size:15px;
+font-weight:700;
+color:#838383;
+margin-right:22.5px;
+}
+.textblock2{
+
+width:266px;
+height:37px;
+text-align: right;
+}
+.large
+{
+font-family:Inter;
+font-size:30px;
+font-weight:700;
+color:#FFFFFF;
+margin-right:22.5px;
+height:100%;
+}
+button {
+            margin: 0;
+            padding: 0;
+            border: none;
+            background: none;
+            font: inherit;
+            color: inherit;
+            cursor: pointer;
+            outline: none;
+        }
+span{
+user-select:none;
+}
+
+</style>
+<body>
+<div class="background">
+<div class="top">
+	<div class="block"></div>
+	<div class="textblock1"><span class="small"></span></div>
+	<div class="textblock2"><span class="large"></span></div>
+</div>
+<div class="bottom">
+	<div class="horizontal"></div>
+		<div class="horizontal2">
+		<div class="circlered"><img src="del.png"></div>
+		<div class="circlered"><span>C</span></div>
+		<div class="circleblue"><span>%</span></div>
+		<div class="circleblue"><span>+</span></div>
+	</div>
+		<div class="horizontal3">
+		<div class="circlegreen"><span>7</span></div>
+		<div class="circlegreen"><span>8</span></div>
+		<div class="circlegreen" style="margin-left:5.6px;
+										margin-right:5.6px;"><span>9</span></div>
+		<div class="circleblue"><span>-</span></div>
+	</div>
+		<div class="horizontal4">
+		<div class="circlegreen"><span>4</span></div>
+		<div class="circlegreen"><span>5</span></div>
+		<div class="circlegreen" style="margin-left:5.6px;
+										margin-right:5.6px;"><span>6</span></div>
+		<div class="circleblue"><span>/</span></div>
+	</div>
+		<div class="horizontal4">
+		<div class="circlegreen"><span>1</span></div></button>
+		<div class="circlegreen"><span>2</span></div>
+		<div class="circlegreen" style="margin-left:5.6px;
+										margin-right:5.6px;"><span>3</span></div>
+		<div class="circleblue"><span style="font-size:17px;">x</span></div>
+	</div>
+		<div class="horizontal4">
+		<div class="circlegreen"><span>0</span></div>
+		<div class="circlegreen"><span>00</span></div>
+		<div class="circlegreen" style="margin-left:5.6px;
+										margin-right:5.6px;"><span>.</span></div>
+		<div class="circleblue"><span>=</span></div>
+	</div>
+</div>
+</div>
+<script>
+        document.addEventListener('DOMContentLoaded', function () {
+            let inputText = ''; 
+
+            //event listener kada div
+            document.querySelectorAll('.circlegreen, .circleblue').forEach(button => {
+                button.addEventListener('click', function () {
+                    const buttonText = button.textContent.trim();
+                    //symbol function
+                    if (['+', '-', '*', '/', '%'].includes(buttonText)) {
+                        //function para hindi madoble yung symbol
+                        if (inputText !== '' && ['+', '-', '*', '/', '%'].includes(inputText.slice(-1))) {
+                            inputText = inputText.slice(0, -1) + buttonText;
+                        } else {                           
+                            inputText += buttonText;
+                        }
+                    } else if (buttonText === '=') {
+                        //replace x sa asterisk
+                        inputText = inputText.replace(/x/g, '*');
+
+                        //calculation
+                        let result;
+                        try {
+                            result = eval(inputText);
+                            document.querySelector('.small').textContent = inputText + '=' + result;
+                        } catch (error) {
+                            result = 'Error';
+                        }
+
+                        //clear large after equals
+                        document.querySelector('.large').textContent = result;                
+                        inputText = '';
+                    } else {
+                        //limit 10 characters
+                        if (inputText.length < 11) {
+                            inputText += buttonText;
+                        }
+                    }
+                    //update para lumabas yung pinindot
+                    document.querySelector('.large').textContent = inputText;
+                });
+            });
+
+            //backspace function
+            document.querySelector('.circlered').addEventListener('click', function () {
+                if (inputText.length > 0) {
+                    inputText = inputText.slice(0, -1);
+                    document.querySelector('.large').textContent = inputText;
+                }
+            });
+
+            //C function
+            document.querySelector('.circlered span').addEventListener('click', function () {
+                inputText = '';
+                document.querySelector('.large').textContent = inputText;
+                document.querySelector('.small').textContent = inputText;
+            });
+        });
+    </script>
+</body>
+</html>
