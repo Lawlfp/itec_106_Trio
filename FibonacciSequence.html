@@ -1,0 +1,28 @@
+<html>
+<script>
+let array=[];
+let start1=0;
+let start2=1;
+let howmany=parseInt(prompt("Fibonacci Limit"));
+if(howmany>=0 && howmany<=99){
+	for(let i=0;howmany>i;i++){
+		if(i>1){
+			calc=start1+start2;		
+			array.push(calc);
+			start1=start2;
+			start2=calc;
+		}
+		else if(i===1){
+			array.push(start2);			
+		}
+		else{
+			array.push(start1);			
+		}	
+	}
+alert(array);
+}
+else{
+alert("Invalid Input");
+}
+</script>
+</html>		
